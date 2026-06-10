@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BOOM KELOMPOK 4 🤖💣</title>
+  <link rel="stylesheet" href="gamebom.css">
+</head>
+<body>
+
+  <!-- WELCOME SCREEN -->
+  <div id="welcome-screen" class="screen active">
+    <div class="title-wrap">
+      <div class="title-main">🤖 BOOM KELOMPOK 4</div>
+      <div class="title-sub">CYBERPUNK MECHA BOMBER</div>
+    </div>
+
+    <!-- FEATURE: ICON SELECTOR -->
+    <div class="avatar-section">
+      <div class="input-label">PILIH AVATAR ROBOT</div>
+      <div class="avatar-options">
+        <div class="avatar-box active" onclick="selectAvatar('🤖', this)">🤖<span class="avatar-name">Classic</span></div>
+        <div class="avatar-box" onclick="selectAvatar('👾', this)">👾<span class="avatar-name">Alien</span></div>
+        <div class="avatar-box" onclick="selectAvatar('🦊', this)">🦊<span class="avatar-name">Fox-Bot</span></div>
+        <div class="avatar-box" onclick="selectAvatar('💀', this)">💀<span class="avatar-name">Doom</span></div>
+        <div class="avatar-box" onclick="selectAvatar('🚀', this)">🚀<span class="avatar-name">Mecha</span></div>
+      </div>
+    </div>
+
+    <div class="input-wrap">
+      <div class="input-label">NAMA PILOT</div>
+      <input type="text" id="player-name" placeholder="Ketik nama pilot..." maxlength="16" autocomplete="off">
+      <div id="name-error" style="font-size:8px;color:var(--red);min-height:16px;"></div>
+      <button class="btn btn-primary" onclick="startGame()">▶ INISIALISASI GAME</button>
+    </div>
+
+    <div class="lb-wrap">
+      <div class="lb-title">🏆 REKOR PILOT TERBAIK — TOP 5</div>
+      <table class="lb-table">
+        <thead><tr><th>#</th><th>NAMA</th><th>SKOR</th><th>WAKTU</th></tr></thead>
+        <tbody id="lb-body"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- GAME SCREEN -->
+  <div id="game-screen" class="screen">
+    <div id="hud">
+      <div class="hud-item">
+        <span class="label">PILOT:</span>
+        <span class="val" id="hud-name">---</span>
+      </div>
+      <div class="hud-item">
+        <span class="label">SKOR:</span>
+        <span class="val" id="hud-score">0</span>
+      </div>
+      <div class="hud-item">
+        <span class="label">WAKTU:</span>
+        <span class="val" id="hud-time">0s</span>
+      </div>
+      <div class="hud-item">
+        <span class="label">NYAWA:</span>
+        <div class="lives-wrap" id="hud-lives"></div>
+      </div>
+      <div class="hud-item">
+        <span class="label">🔥 RADIUS:</span>
+        <span class="val" id="hud-radius">2</span>
+      </div>
+      <button class="btn btn-secondary" onclick="triggerGameOver(true)">ABORT MISSION</button>
+    </div>
+
+    <div id="game-board"></div>
+
+    <div class="mobile-controls">
+      <div class="d-pad">
+        <div></div>
+        <button class="d-btn" onpointerdown="mobileMove(0,-1)">▲</button>
+        <div></div>
+        <button class="d-btn" onpointerdown="mobileMove(-1,0)">◀</button>
+        <div></div>
+        <button class="d-btn" onpointerdown="mobileMove(1,0)">▶</button>
+        <div></div>
+        <button class="d-btn" onpointerdown="mobileMove(0,1)">▼</button>
+        <div></div>
+      </div>
+      <button class="bomb-btn" onpointerdown="placeBomb()">💣</button>
+    </div>
+  </div>
+
+  <!-- GAME OVER SCREEN -->
+  <div id="gameover-screen" class="screen">
+    <div class="result-title">MISSION FAILED</div>
+    <div class="result-sub">ROBOTMU HANCUR LEBUR...</div>
+    <div class="result-score" id="go-score"></div>
+    <button class="btn btn-primary" onclick="goToMenu()">↩ KEMBALI KE MARKAS</button>
+  </div>
+
+  <!-- VICTORY SCREEN -->
+  <div id="victory-screen" class="screen">
+    <div class="result-title">VICTORY!</div>
+    <div class="result-sub">SEMUA STAGE BERHASIL DIKUASAI!</div>
+    <div class="result-score" id="vc-score"></div>
+    <button class="btn btn-primary" onclick="goToMenu()">↩ KEMBALI KE MARKAS</button>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>
